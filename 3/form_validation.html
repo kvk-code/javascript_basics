@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+    <script>
+        function validateForm() {
+            var firstName = document.forms["userForm"]["firstName"].value;
+            var lastName = document.forms["userForm"]["lastName"].value;
+            var age = document.forms["userForm"]["age"].value;
+            var email = document.forms["userForm"]["email"].value;
+            var gender = document.forms["userForm"]["gender"].value;
+
+            if (firstName == "" || lastName == "" || age == "" || email == "" || gender == "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            if (isNaN(age) || age > 150) {
+                alert("Age must be a number and less than or equal to 150");
+                return false;
+            }
+
+            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email format");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form name="userForm" onsubmit="return validateForm()" method="post">
+        First Name: <input type="text" name="firstName"><br>
+        Last Name: <input type="text" name="lastName"><br>
+        Age: <input type="text" name="age"><br>
+        Email: <input type="text" name="email"><br>
+        Gender: <select name="gender">
+                    <option value="">Select...</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
